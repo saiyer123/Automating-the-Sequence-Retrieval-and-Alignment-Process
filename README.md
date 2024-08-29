@@ -1,6 +1,14 @@
-# Automating-the-Sequence-Retrieval-and-Alignment-Process
+# DNA Sequence Alignment Automation
 
-Objective: Write a script that automates the download of DNA sequences from databases like NCBI and performs the alignment using tools like BLAST or Clustal Omega.
+This project automates the retrieval of DNA sequences from NCBI and runs sequence alignment using BLAST.
 
-Requirements:
-pip install biopython requests
+## Features
+- Fetch DNA sequences from NCBI using Biopython's Entrez.
+- Perform sequence alignment using BLAST via subprocess.
+
+## Installation
+To run this script, you need Python and the following libraries:
+- Biopython
+- Requests
+
+You can install the required libraries with:
