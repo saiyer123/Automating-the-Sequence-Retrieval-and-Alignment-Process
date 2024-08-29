@@ -1,0 +1,9 @@
+from Bio import Entrez
+
+Entrez.email = "your.email@example.com"
+handle = Entrez.efetch(db="nucleotide", id="NM_007294", rettype="fasta", retmode="text")
+sequence_data = handle.read()
+handle.close()
+
+with open("BRCA1_sequence.fasta", "w") as file:
+    file.write(sequence_data)
