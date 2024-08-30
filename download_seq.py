@@ -53,6 +53,7 @@ def GC_content(output_file):
         if nuc in 'ATCG':
             atcg_length += 1
             if nuc in 'GC':
+                atcg_length += 1
                 gc_total += 1
     gc_percentage = (gc_total / atcg_length) * 100
     print(f"GC Percentage = {gc_percentage:.2f}%")
