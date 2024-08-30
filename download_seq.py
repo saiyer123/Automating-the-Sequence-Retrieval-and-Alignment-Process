@@ -15,7 +15,7 @@ def fetch_sequence(gene_id, output_file):
 # Function to run BLAST using subprocess
 def run_blast(input_file, output_file):
     try:
-        subprocess.run(["blastn", "-query", input_file, "-db", "nt", "-out", output_file, "-blastdb_version", "4"])
+        subprocess.run(["blastn", "-query", input_file, "-out", output_file, "-remote"])
         print(f"BLAST results saved to {output_file}")
     except Exception as e:
         print(f"Error running BLAST: {e}")
