@@ -55,7 +55,7 @@ def GC_content(output_file):
             if nuc in 'GC':
                 gc_total += 1
     gc_percentage = (gc_total / atcg_length) * 100
-    print("Sequence Length: ") + str(atcg_length) + "Nucleotides"
+    print(f"GC Percentage = {gc_percentage:.2f}%")
     print(f"Nuc length = {atcg_length}")
     return gc_percentage
 
