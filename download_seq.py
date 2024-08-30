@@ -85,6 +85,9 @@ if __name__ == "__main__":
     GC_content(fasta_file)
     AT_content(fasta_file)
 
+    # Add headers to output file
+    add_headers_with_format(output_file)
+
 #To create this code, I first imported Entrez using biopython. This gives me access to the NCBI database.
 #Eventually we want to run blast on our dataset so we need to import subprocess for that. In fetching our DNA
 #sequence I created a function for that takes 2 parameters: gene_id and output_file. The gene_id is the specific 
