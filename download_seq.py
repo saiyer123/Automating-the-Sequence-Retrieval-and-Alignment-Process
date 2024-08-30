@@ -48,21 +48,29 @@ def add_headers_with_format(output_file):
 # Function to calcualte GC content of Fasta file
 def GC_content(output_file):
     gc_total = 0
-    length = len(output_file)
+    atcg_length = 0
     for nuc in output_file:
-        if nuc == 'G' or nuc == 'C':
-            gc_total += 1
-    gc_percentage = (gc_total / length) * 100
-    print(f"GC Percentage = {gc_percentage}%")
+        if nuc in 'ATCG':
+            atcg_length += 1
+            if nuc in 'GC':
+                gc_total += 1
+    gc_percentage = (gc_total / atcg_length) * 100
+    print(f"GC Percentage = {gc_percentage:.2f}%")
+    return gc_percentage
 
 def AT_content(output_file):
     at_total = 0
-    length = len(output_file)
+    atcg_length = 0
     for nuc in output_file:
-        if nuc == 'A' or nuc == 'T':
-            at_total += 1
-    at_percentage = (at_total / length) * 100
-    print(f"AT Percentage = {at_percentage}%")
+        if nuc in 'ATCG':
+            atcg_length += 1
+            if nuc in 'AT':
+                at_total += 1
+    at_percentage = (at_total / atcg_length) * 100
+    print(f"AT Percentage = {at_percentage:.2f}%")
+    return at_percentage
+
+
             
         
 # Main script
