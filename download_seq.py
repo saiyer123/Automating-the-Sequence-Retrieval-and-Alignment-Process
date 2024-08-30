@@ -26,10 +26,6 @@ def run_blast(input_file, output_file):
                 print("All attempts to run BLAST failed.")
             print(f"Error running BLAST: {e}")
         
-
-# Funtion to handls errors running Blast
-def error_handling(input_file, output_file):
-    if run_blast
 # Main script
 if __name__ == "__main__":
     gene_id = "NM_007294"  # Example gene ID for BRCA1
