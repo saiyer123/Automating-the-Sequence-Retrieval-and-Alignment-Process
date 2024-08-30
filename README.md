@@ -10,5 +10,5 @@ This project automates the retrieval of DNA sequences from NCBI and runs sequenc
 To run this script, you need Python and the following libraries:
 - Biopython
 - Requests
-
+- Blast
 You can install the required libraries with:
