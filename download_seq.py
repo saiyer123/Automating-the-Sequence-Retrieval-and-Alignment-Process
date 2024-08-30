@@ -13,9 +13,9 @@ def fetch_sequence(gene_id, output_file):
     print(f"Sequence for {gene_id} saved to {output_file}")
 
 # Function to run BLAST using subprocess
-def run_blast(input_file, output_file):
+def run_blast(input_file, output_file, db_path):
     try:
-        subprocess.run(["blastn", "-query", input_file, "-out", output_file, "-remote"])
+        subprocess.run(["blastn", "-query", input_file, "-db", db_path, "-out", output_file, "-outfmt", "6", "-remote"])
         print(f"BLAST results saved to {output_file}")
     except Exception as e:
         print(f"Error running BLAST: {e}")
@@ -30,9 +30,10 @@ if __name__ == "__main__":
     gene_id = "NM_007294"  # Example gene ID for BRCA1
     fasta_file = "BRCA1_sequence.fasta"
     blast_output = "BRCA1_blast_results.txt"
-    
+    blast_db = "path/to/your/blast/database"  # You need to specify this
+
     # Fetch the sequence
     fetch_sequence(gene_id, fasta_file)
-    
+
     # Run BLAST on the fetched sequence
-    run_blast(fasta_file, blast_output)
+    run_blast(fasta_file, blast_output, blast_db)
