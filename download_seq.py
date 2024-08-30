@@ -25,6 +25,31 @@ def run_blast(input_file, output_file):
             if attempts == 5:
                 print("All attempts to run BLAST failed.")
             print(f"Error running BLAST: {e}")
+    headers = "Query ID\tSubject ID\t% Identity\tAlignment Length\tMismatch\tGap Opens\tQ. Start\tQ. End\tS. Start\tS. End\tE-value\tBit Score\n"
+    with open(output_file, 'r') as original:
+        data = original.read()
+    with open(output_file, 'w') as modified:
+        modified.write(headers + data)
+
+# Function to calcualte GC content of Fasta file
+def GC_content(output_file):
+    gc_total = 0
+    length = len(output_file)
+    for nuc in output_file:
+        if nuc == 'G' or nuc == 'C':
+            gc_total += 1
+    gc_percentage = (gc_total / length) * 100
+    print(f"GC Percentage = {gc_percentage}%")
+
+def AT_content(output_file):
+    at_total = 0
+    length = len(output_file)
+    for nuc in output_file:
+        if nuc == 'A' or nuc == 'T':
+            at_total += 1
+    at_percentage = (at_total / length) * 100
+    print(f"AT Percentage = {at_percentage}%")
+            
         
 # Main script
 if __name__ == "__main__":
