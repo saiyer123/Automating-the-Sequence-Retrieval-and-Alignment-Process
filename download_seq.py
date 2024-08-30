@@ -68,19 +68,10 @@ def AT_content(output_file):
                 at_total += 1
     at_percentage = (at_total / atcg_length) * 100
     print(f"AT Percentage = {at_percentage:.2f}%")
+    print("fNuc_length = {atcg_length}")
     return at_percentage
 
-# Function to calculate nucleotide length
-def nuc_length(output_file):
-    atcg_length = 0
-    for nuc in output_file:
-        if nuc in 'ATCG':
-            atcg_length += 1
-    print("f{atcg_length}")
     
-
-
-
             
         
 # Main script
@@ -102,8 +93,7 @@ if __name__ == "__main__":
     # Add headers to output file
     add_headers_with_format(blast_output)
 
-    # Calculate nucleotide length
-    nuc_length(blast_output)
+
 
 
 #To create this code, I first imported Entrez using biopython. This gives me access to the NCBI database.
