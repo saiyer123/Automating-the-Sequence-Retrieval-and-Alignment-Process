@@ -44,10 +44,6 @@ def add_headers_with_format(output_file):
             formatted_line = header_format.format(*line.strip().split('\t'))
             modified.write(formatted_line)
 
-# Example usage
-output_file = "BRCA1_blast_results.txt"
-add_headers_with_format(output_file)
-
 
 # Function to calcualte GC content of Fasta file
 def GC_content(output_file):
