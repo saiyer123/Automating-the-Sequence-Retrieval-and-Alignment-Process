@@ -78,7 +78,7 @@ if __name__ == "__main__":
     gene_id = "NM_007294"  # Example gene ID for BRCA1
     fasta_file = "BRCA1_sequence.fasta"
     blast_output = "BRCA1_blast_results.txt"
-
+    
     # Fetch the sequence
     fetch_sequence(gene_id, fasta_file)
 
@@ -90,7 +90,8 @@ if __name__ == "__main__":
     AT_content(fasta_file)
 
     # Add headers to output file
-    add_headers_with_format(output_file)
+    add_headers_with_format(blast_output)
+
 
 #To create this code, I first imported Entrez using biopython. This gives me access to the NCBI database.
 #Eventually we want to run blast on our dataset so we need to import subprocess for that. In fetching our DNA
