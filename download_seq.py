@@ -68,7 +68,7 @@ def AT_content(output_file):
                 at_total += 1
     at_percentage = (at_total / atcg_length) * 100
     print(f"AT Percentage = {at_percentage:.2f}%")
-    print("fNuc_length = {atcg_length}")
+    print("Nuc length =" + atcg_length)
     return at_percentage
 
     
