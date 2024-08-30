@@ -46,10 +46,12 @@ def add_headers_with_format(output_file):
 
 
 # Function to calcualte GC content of Fasta file and total nucleotide length
-def GC_content(output_file):
+def GC_content(file_path):
     gc_total = 0
     atcg_length = 0
-    for nuc in output_file:
+    with open(file_path, 'r') as file:
+        sequence = file.read().replace('\n', '')  # Read the file and remove any newlines
+    for nuc in sequence:
         if nuc in 'ATCG':  # Count all nucleotides
             atcg_length += 1
         if nuc in 'GC':  # Count GC nucleotides
@@ -59,10 +61,12 @@ def GC_content(output_file):
     print(f"GC Percentage = {gc_percentage:.2f}%")
     return gc_percentage
 
-def AT_content(output_file):
+def AT_content(file_path):
     at_total = 0
     atcg_length = 0
-    for nuc in output_file:
+    with open(file_path, 'r') as file:
+        sequence = file.read().replace('\n', '')  # Read the file and remove any newlines
+    for nuc in sequence:
         if nuc in 'ATCG':  # Count all nucleotides
             atcg_length += 1
         if nuc in 'AT':  # Count AT nucleotides
@@ -70,6 +74,7 @@ def AT_content(output_file):
     at_percentage = (at_total / atcg_length) * 100
     print(f"AT Percentage = {at_percentage:.2f}%")
     return at_percentage
+
 
 
     
