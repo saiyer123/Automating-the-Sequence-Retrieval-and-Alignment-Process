@@ -1,5 +1,6 @@
 from Bio import Entrez
 import subprocess
+import sys
 
 # Function to retrieve DNA sequence from NCBI using Entrez
 def fetch_sequence(gene_id, output_file):
@@ -75,6 +76,16 @@ def AT_content(file_path):
     print(f"AT Percentage = {at_percentage:.2f}%")
     return at_percentage
 
+def Motif_search(motif, output_file):
+    with open(output_file, 'r') as file:
+        sequence = file.read().replace('\n', '')
+    motif_count = 0
+    motif_length = len(motif)
+
+    for i in range(len(sequence) - motif_length + 1):
+        if sequence[i:i + motif_length] == motif:
+            motif_count += 1
+    print(f"Motif '{motif}' found {motif_count} times.")               
 
 
     
@@ -98,6 +109,13 @@ if __name__ == "__main__":
 
     # Add headers to output file
     add_headers_with_format(blast_output)
+
+    motif = input("Please enter a motif to search for (or type 'na' to skip): ").strip()
+
+    if motif.lower() != 'na':
+        Motif_search(motif, fasta_file)
+    else:
+        print("Motif search skipped.")
 
 
 
