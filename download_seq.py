@@ -55,6 +55,7 @@ def GC_content(output_file):
             if nuc in 'GC':
                 gc_total += 1
     gc_percentage = (gc_total / atcg_length) * 100
+    print("Sequence Length: ") + str(atcg_length)
     print(f"GC Percentage = {gc_percentage:.2f}%")
     return gc_percentage
 
@@ -68,7 +69,6 @@ def AT_content(output_file):
                 at_total += 1
     at_percentage = (at_total / atcg_length) * 100
     print(f"AT Percentage = {at_percentage:.2f}%")
-    print("Nuc length =" + atcg_length)
     return at_percentage
 
     
