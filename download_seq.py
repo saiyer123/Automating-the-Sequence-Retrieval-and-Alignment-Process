@@ -25,11 +25,29 @@ def run_blast(input_file, output_file):
             if attempts == 5:
                 print("All attempts to run BLAST failed.")
             print(f"Error running BLAST: {e}")
-    headers = "Query ID\tSubject ID\t% Identity\tAlignment Length\tMismatch\tGap Opens\tQ. Start\tQ. End\tS. Start\tS. End\tE-value\tBit Score\n"
+
+def add_headers_with_format(output_file):
+    headers = [
+        "Query ID", "Subject ID", "% Identity", "Alignment Length", "Mismatch",
+        "Gap Opens", "Q. Start", "Q. End", "S. Start", "S. End", "E-value", "Bit Score"
+    ]
+    # Define a format string with specified column widths
+    header_format = "{:<12} {:<12} {:<12} {:<18} {:<10} {:<10} {:<8} {:<8} {:<8} {:<8} {:<10} {:<10}\n"
+
     with open(output_file, 'r') as original:
-        data = original.read()
+        data = original.readlines()
+    
+    # Write the headers with formatting
     with open(output_file, 'w') as modified:
-        modified.write(headers + data)
+        modified.write(header_format.format(*headers))
+        for line in data:
+            formatted_line = header_format.format(*line.strip().split('\t'))
+            modified.write(formatted_line)
+
+# Example usage
+output_file = "BRCA1_blast_results.txt"
+add_headers_with_format(output_file)
+
 
 # Function to calcualte GC content of Fasta file
 def GC_content(output_file):
@@ -63,6 +81,9 @@ if __name__ == "__main__":
     # Run BLAST on the fetched sequence
     run_blast(fasta_file, blast_output)
 
+    # Calculate GC and AT %
+    GC_content(fasta_file)
+    AT_content(fasta_file)
 
 #To create this code, I first imported Entrez using biopython. This gives me access to the NCBI database.
 #Eventually we want to run blast on our dataset so we need to import subprocess for that. In fetching our DNA
