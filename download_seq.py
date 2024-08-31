@@ -129,11 +129,14 @@ def translate_seq(output_file):
         amino_acid = codon_table.get(codon, 'X')  # Default to 'X' if codon not found
         protein += amino_acid
 
-    # Save the translated protein to a file
+    # Format the output to be more readable, breaking every 60 characters
+    formatted_protein = '\n'.join([protein[i:i+60] for i in range(0, len(protein), 60)])
+
+    # Save the formatted protein sequence to a file
     output_filename = "translated_protein.txt"
     try:
         with open(output_filename, 'w') as output_file:
-            output_file.write(protein)
+            output_file.write(formatted_protein)
         print(f"Translated protein saved to {output_filename}")
     except Exception as e:
         print(f"Error writing to file: {e}")
