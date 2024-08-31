@@ -116,7 +116,7 @@ def translate_seq(output_file):
 
     try:
         with open(fasta_file, 'r') as file:
-            sequence = file.read().replace('\n', '')  # Read the file and remove any newlines
+            sequence = file.read().replace('\n', '')
     except FileNotFoundError:
         print(f"Error: Input file '{fasta_file}' not found.")
         return None
@@ -126,13 +126,11 @@ def translate_seq(output_file):
     
     for i in range(0, len(trimmed_seq), 3):
         codon = trimmed_seq[i:i+3]
-        amino_acid = codon_table.get(codon, 'X')  # Default to 'X' if codon not found
+        amino_acid = codon_table.get(codon, 'X') 
         protein += amino_acid
 
-    # Format the output to be more readable, breaking every 60 characters
     formatted_protein = '\n'.join([protein[i:i+60] for i in range(0, len(protein), 60)])
 
-    # Save the formatted protein sequence to a file
     output_filename = "translated_protein.txt"
     try:
         with open(output_filename, 'w') as output_file:
