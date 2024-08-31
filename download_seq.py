@@ -87,8 +87,52 @@ def Motif_search(motif, output_file):
             motif_count += 1
     print(f"Motif '{motif}' found {motif_count} times.")               
 
+def translate_seq(output_file):
+    codon_table = {
+        'ATA':'I', 'ATC':'I', 'ATT':'I', 'ATG':'M',
+        'ACA':'T', 'ACC':'T', 'ACG':'T', 'ACT':'T',
+        'AAC':'N', 'AAT':'N', 'AAA':'K', 'AAG':'K',
+        'AGC':'S', 'AGT':'S', 'AGA':'R', 'AGG':'R',                 
+        'CTA':'L', 'CTC':'L', 'CTG':'L', 'CTT':'L',
+        'CCA':'P', 'CCC':'P', 'CCG':'P', 'CCT':'P',
+        'CAC':'H', 'CAT':'H', 'CAA':'Q', 'CAG':'Q',
+        'CGA':'R', 'CGC':'R', 'CGG':'R', 'CGT':'R',
+        'GTA':'V', 'GTC':'V', 'GTG':'V', 'GTT':'V',
+        'GCA':'A', 'GCC':'A', 'GCG':'A', 'GCT':'A',
+        'GAC':'D', 'GAT':'D', 'GAA':'E', 'GAG':'E',
+        'GGA':'G', 'GGC':'G', 'GGG':'G', 'GGT':'G',
+        'TCA':'S', 'TCC':'S', 'TCG':'S', 'TCT':'S',
+        'TTC':'F', 'TTT':'F', 'TTA':'L', 'TTG':'L',
+        'TAC':'Y', 'TAT':'Y', 'TAA':'_', 'TAG':'_',
+        'TGC':'C', 'TGT':'C', 'TGA':'_', 'TGG':'W',
+    }
 
-    
+    amino_acid_dict = {
+        'C': 'CYS', 'D': 'ASP', 'S': 'SER', 'Q': 'GLN', 'K': 'LYS',
+        'I': 'ILE', 'P': 'PRO', 'T': 'THR', 'F': 'PHE', 'N': 'ASN', 
+        'G': 'GLY', 'H': 'HIS', 'L': 'LEU', 'R': 'ARG', 'W': 'TRP', 
+        '*': 'TER', 'A': 'ALA', 'V': 'VAL', 'E': 'GLU', 'Y': 'TYR', 'M': 'MET', 'X': 'XAA'
+    }
+
+    trimmed_seq = output_file[:len(output_file) - len(output_file) % 3]
+
+    # Step 4: Translate sequence into protein
+    protein = ""
+    full_protein = []
+
+    for i in range(0, len(trimmed_seq), 3):
+        codon = trimmed_seq[i:i+3]
+        amino_acid = codon_table.get(codon, 'X') 
+        protein += amino_acid
+        full_protein.append(amino_acid_dict.get(amino_acid, 'XAA')) 
+
+    with open("translated_protein.txt", "w") as output_file:
+        output_file.write(protein)
+
+    print("Translated protein saved to translated_protein.txt")
+
+
+            
             
         
 # Main script
@@ -116,6 +160,8 @@ if __name__ == "__main__":
         Motif_search(motif, fasta_file)
     else:
         print("Motif search skipped.")
+
+    Translate_seq(fasta_file)
 
 
 
