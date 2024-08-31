@@ -161,7 +161,7 @@ if __name__ == "__main__":
     else:
         print("Motif search skipped.")
 
-    Translate_seq(fasta_file)
+    translate_seq(fasta_file)
 
 
 
