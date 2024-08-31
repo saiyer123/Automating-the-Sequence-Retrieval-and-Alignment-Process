@@ -172,7 +172,7 @@ if __name__ == "__main__":
     else:
         print("Motif search skipped.")
 
-    translate_seq('BRCA1_sequence.fasta', 'translated_protein.txt')
+    translate_seq('BRCA1_sequence.fasta')
 
 
 
