@@ -115,35 +115,29 @@ def translate_seq(output_file):
     }
 
     try:
-        with open(input_file, 'r') as file:
-            sequence = file.read().replace('\n', '')
+        with open(fasta_file, 'r') as file:
+            sequence = file.read().replace('\n', '')  # Read the file and remove any newlines
     except FileNotFoundError:
-        print(f"Error: Input file '{input_file}' not found.")
+        print(f"Error: Input file '{fasta_file}' not found.")
         return None
-    
-    print(f"Read sequence length: {len(sequence)}")
-    
+
     trimmed_seq = sequence[:len(sequence) - (len(sequence) % 3)]
-    print(f"Trimmed sequence length: {len(trimmed_seq)}")
-    
     protein = ""
-    full_protein = []
     
     for i in range(0, len(trimmed_seq), 3):
         codon = trimmed_seq[i:i+3]
-        amino_acid = codon_table.get(codon, 'X')
+        amino_acid = codon_table.get(codon, 'X')  # Default to 'X' if codon not found
         protein += amino_acid
-        full_protein.append(amino_acid_dict.get(amino_acid, 'XAA'))
-    
-    print(f"Translated protein length: {len(protein)}")
-    
+
+    # Save the translated protein to a file
+    output_filename = "translated_protein.txt"
     try:
-        with open('translated_protein.txt', "w") as output_file:
+        with open(output_filename, 'w') as output_file:
             output_file.write(protein)
-        print("Protein sequence written to translated_protein.txt")
+        print(f"Translated protein saved to {output_filename}")
     except Exception as e:
         print(f"Error writing to file: {e}")
-    
+
     return protein
 
 
@@ -176,7 +170,7 @@ if __name__ == "__main__":
     else:
         print("Motif search skipped.")
 
-    translate_seq('BRCA1_sequence.fasta')
+    translate_seq(fasta_file)
 
 
 
