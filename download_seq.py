@@ -114,8 +114,12 @@ def translate_seq(output_file):
         '*': 'TER', 'A': 'ALA', 'V': 'VAL', 'E': 'GLU', 'Y': 'TYR', 'M': 'MET', 'X': 'XAA'
     }
 
-    with open(input_file, 'r') as file:
-        sequence = file.read().replace('\n', '')
+    try:
+        with open(input_file, 'r') as file:
+            sequence = file.read().replace('\n', '')
+    except FileNotFoundError:
+        print(f"Error: Input file '{input_file}' not found.")
+        return None
     
     print(f"Read sequence length: {len(sequence)}")
     
@@ -134,9 +138,9 @@ def translate_seq(output_file):
     print(f"Translated protein length: {len(protein)}")
     
     try:
-        with open(output_file, "w") as output_file:
+        with open('translated_protein.txt', "w") as output_file:
             output_file.write(protein)
-        print(f"Protein sequence written to {output_file}")
+        print("Protein sequence written to translated_protein.txt")
     except Exception as e:
         print(f"Error writing to file: {e}")
     
